@@ -32,21 +32,49 @@ class URRobot(Robot):
 
         return mask
 
+    def get_actual_digital_input_bytes(self) -> bytes:
+        """
+        Gibt den digitalen Eingaenge als Byte in der folgenden Reihenfolge aus.\n
+        1st Byte: Digitaler Eingang\n
+        2nd Byte: Konfigurierbarer Eingang\n
+        3rd Byte: Werkzeugeingang
+        :return: (byte) Zustand aller Eingaenge
+        """
+        return self.state.actual_digital_input_bits.to_bytes(3, byteorder="big")
+
+    def get_actual_digital_input_int(self) -> int:
+        """
+        Gibt den aktuellen Integerwert alles digitalen Eingaenge aus
+        :return: (int) Wert der Eingaenge
+        """
+        return self.state.actual_digital_input_bits
+
+    def get_digital_input_normal(self, input: int) -> bool:
+        """
+        Gibt den aktuellen Zustand des Ausganges im Feld von "Digitaler Eingang" aus.
+        :param input: Nummer des Einganges
+        :return:
+        """
+        if input < 0 or input > 7:
+            raise  Exception("Die Zahl darf nicht kleiner als 0 oder groesser als 7 sein!")
+
+        bits = format(self.state.actual_digital_input_bits.to_bytes(3, byteorder='big')[2], '#010b')[2:]
+        return bool(int(bits[(input * -1) - 1]))
+
     def get_actual_digital_output_bytes(self) -> bytes:
         """
         Gibt den digitalen Ausgängen als Byte in der Reihenfolge aus.\n
         1st Byte: Digitaler Ausgang\n
         2nd Byte: Konfigurierbarer Ausgang\n
         3rd Byte: Werkzeugausgang
-
-        :return:
+        :return: (byte) Zustand aller Ausgaenge
         """
         return self.state.actual_digital_output_bits.to_bytes(3, byteorder='big')
 
     def get_actual_digital_output_int(self) -> int:
         """
-        Gibt der aktuelle Integerwert aller digitalen Ausgaenge an
-        :return: (int)der DO
+        Gibt der aktuelle Integerwert aller digitalen Ausgaenge aus
+        :return: (int)Wert der Ausgaenge
         """
         return self.state.actual_digital_output_bits
 
