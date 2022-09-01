@@ -141,8 +141,42 @@ class URRobot(Robot):
         """
         self.set_setup("standard_digital_output_mask", self.maskList_to_int(output))
 
-    def set_configurable_digital_out(self, output: int, value: bool) -> None:
-        pass
+    def set_single_configurable_digital_output(self, output: int, value: bool) -> None:
+        """
+        Es wird nur der Ausgang mit dem Wert beschrieben.
+        :param value: (bool) Ausgang zustand
+        :param output: (int) Welcher Ausgang angesprochen werden soll
+        :return: None
+        """
+        configurable_digital_output_list = self.int_to_maskList(self.get_setup("configurable_digital_output"))
+        configurable_digital_output_list[output] = value
+        self.set_setup("configurable_digital_output", self.maskList_to_int(configurable_digital_output_list))
+
+    def set_list_configurable_digital_output(self, output: list) -> None:
+        """
+        Es werden nur die Ausgänge vom Reiter 'Digitaler Ausgang' die ein True in der List haben.
+        :param output: (list) Liste der Ausgaenge
+        :return: None
+        """
+        self.set_setup("configurable_digital_output", self.maskList_to_int(output))
+
+    def set_single_configurable_digital_output_mask(self, output: int):
+        """
+        Es wird ein einziger Digitaler Ausgang hinzugefuegt oder entfernt welcher der Computer kontrolliert.
+        :param output: (int) Ausgangs Nummer
+        :return: None
+        """
+        mask_list = self.int_to_maskList(self.get_setup("configurable_digital_output_mask"))
+        mask_list[output] = not mask_list[output]
+        self.set_setup("configurable_digital_output_mask", self.maskList_to_int(mask_list))
+
+    def set_list_configurable_digital_output_mask(self, output: list):
+        """
+        Es wird bestimmt welcher Digitaler Ausgang von dem Computer kontrolliert wird.
+        :param output: (list) Eine Liste der Ausgaenge zum Kontrollieren
+        :return: None
+        """
+        self.set_setup("configurable_digital_output_mask", self.maskList_to_int(output))
 
     def set_tcp(self, tup: tuple) -> None:
         # self.tcp = tup
