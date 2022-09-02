@@ -194,21 +194,38 @@ class URRobot(Robot):
     def set_configurable_digital_output(self, integer: int):
         self.set_setup("configurable_digital_output", integer)
 
-    def set_standard_analog_output_mask(self):
-        # TODO standard_analog_output_mask
+    def set_standard_analog_output_mask(self, integer: int):
+        """
+        Select the analoge output with a bit
+        :param integer: (int) 0 bit: output_0; 1 bit: output_1
+        :return: None
+        """
+        self.set_setup("standard_analog_output_mask", integer)
+
+    def set_standard_analog_output_type(self, integer: int):
+        """
+        It will set the output domain for both outputs
+        :param integer: (int) 0: both current; 1: Voltage and Current; 2: Current and Voltage; 3: both voltage
+        :return: None
+        """
+        self.set_setup("standard_analog_output_type", integer)
+
+    def set_standard_analog_output_0(self, value: float):
+        """
+        This will set the output with the percentage
+        :param value: Percentage of the output
+        :return: None
+        """
+        self.set_setup("standard_analog_output_0", value)
         pass
 
-    def set_standard_analog_output_type(self):
-        # TODO standard_analog_output_type
-        pass
-
-    def set_standard_analog_output_0(self):
-        # TODO standard_analog_output_0
-        pass
-
-    def set_standard_analog_output_1(self):
-        # TODO standard_analog_output_1
-        pass
+    def set_standard_analog_output_1(self, value: float):
+        """
+        This will set the output with the percentage.
+        :param value: Percentage of the output
+        :return: None
+        """
+        self.set_setup("standard_analog_output_1", value)
 
     def set_input_bit_registers0_to_31(self):
         # TODO input_bit_registers0_to_31
@@ -232,6 +249,301 @@ class URRobot(Robot):
 
     def set_external_force_torque(self):
         # TODO external_force_torque
+        pass
+
+    # ROBOT CONTROLLER OUTPUTS
+    def get_timestamp(self):
+        # TODO timestamp - (Time elapsed since the controller was started [s])
+        pass
+
+    def get_target_q(self):
+        # TODO target_q - (Target joint positions)
+        pass
+
+    def get_target_qd(self):
+        # TODO target_qd - (Target joint velocities)
+        pass
+
+    def get_target_qdd(self):
+        # TODO target_qdd - (Target joint accelerations)
+        pass
+
+    def get_target_current(self):
+        # TODO target_current - (Target joint currents)
+        pass
+
+    def get_target_moment(self):
+        # TODO target_moment - (Target joint moments (torques))
+        pass
+
+    def get_actual_q(self):
+        # TODO actual_q - (Actual joint positions)
+        pass
+
+    def get_actual_qd(self):
+        # TODO actual_qd - (Actual joint velocities)
+        pass
+
+    def get_actual_current(self):
+        # TODO actual_current
+        pass
+
+    def get_joint_control_output(self):
+        # TODO joint_control_output
+        pass
+
+    def get_actual_TCP_pose(self):
+        # TODO actual_TCP_pose
+        pass
+
+    def get_actual_TCP_speed(self):
+        # TODO actual_TCP_speed
+        pass
+
+    def get_actual_TCP_force(self):
+        # TODO actual_TCP_force
+        pass
+
+    def get_target_TCP_pose(self):
+        # TODO target_TCP_pose
+        pass
+
+    def get_target_TCP_speed(self):
+        # TODO target_TCP_speed
+        pass
+
+    def get_actual_digital_input_bits(self):
+        # TODO actual_digital_input_bits
+        pass
+
+    def get_joint_temperatures(self):
+        # TODO joint_temperatures
+        pass
+
+    def get_actual_execution_time(self):
+        # TODO actual_execution_time
+        pass
+
+    def get_robot_mode(self):
+        # TODO robot_mode
+        pass
+
+    def get_joint_mode(self):
+        # TODO joint_mode
+        pass
+
+    def get_safety_mode(self):
+        # TODO safety_mode
+        pass
+
+    def get_safety_status(self):
+        # TODO safety_status
+        pass
+
+    def get_actual_tool_accelerometer(self):
+        # TODO actual_tool_accelerometer
+        pass
+
+    def get_speed_scaling(self):
+        # TODO speed_scaling
+        pass
+
+    def get_target_speed_fraction(self):
+        # TODO target_speed_fraction
+        pass
+
+    def get_actual_momentum(self):
+        # TODO actual_momentum
+        pass
+
+    def get_actual_main_voltage(self):
+        # TODO actual_main_voltage
+        pass
+
+    def get_actual_robot_voltage(self):
+        # TODO actual_robot_voltage
+        pass
+
+    def get_actual_robot_current(self):
+        # TODO actual_robot_current
+        pass
+
+    def get_actual_joint_voltage(self):
+        # TODO actual_joint_voltage
+        pass
+
+    def get_actual_digital_output_bits(self):
+        # TODO actual_digital_output_bits
+        pass
+
+    def get_runtime_state(self):
+        # TODO runtime_state
+        pass
+
+    def get_elbow_position(self):
+        # TODO elbow_position
+        pass
+
+    def get_elbow_velocity(self):
+        # TODO elbow_velocity
+        pass
+
+    def get_robot_status_bits(self):
+        # TODO robot_status_bits
+        pass
+
+    def get_safety_status_bits(self):
+        # TODO safety_status_bits
+        pass
+
+    def get_analog_io_types(self):
+        # TODO analog_io_types
+        pass
+
+    def get_standard_analog_input0(self):
+        # TODO standard_analog_input0
+        pass
+
+    def get_standard_analog_input1(self):
+        # TODO standard_analog_input1
+        pass
+
+    def get_standard_analog_output0(self):
+        # TODO standard_analog_output0
+        pass
+
+    def get_standard_analog_output1(self):
+        # TODO standard_analog_output1
+        pass
+
+    def get_io_current(self):
+        # TODO io_current
+        pass
+
+    def get_euromap67_input_bits(self):
+        # TODO euromap67_input_bits
+        pass
+
+    def get_euromap67_output_bits(self):
+        # TODO euromap67_output_bits
+        pass
+
+    def get_euromap67_24V_voltage(self):
+        # TODO euromap67_24V_voltage
+        pass
+
+    def get_euromap67_24V_current(self):
+        # TODO euromap67_24V_current
+        pass
+
+    def get_tool_mode(self):
+        # TODO tool_mode
+        pass
+
+    def get_tool_analog_input_types(self):
+        # TODO tool_analog_input_types
+        pass
+
+    def get_tool_analog_input0(self):
+        # TODO tool_analog_input0
+        pass
+
+    def get_tool_analog_input1(self):
+        # TODO tool_analog_input1
+        pass
+
+    def get_tool_output_voltage(self):
+        # TODO tool_output_voltage
+        pass
+
+    def get_tool_output_current(self):
+        # TODO tool_output_current
+        pass
+
+    def get_tool_temperature(self):
+        # TODO tool_temperature
+        pass
+
+    def get_tcp_force_scalar(self):
+        # TODO tcp_force_scalar
+        pass
+
+    def get_output_bit_registers0_to_31(self):
+        # TODO output_bit_registers0_to_31
+        pass
+
+    def get_output_bit_registers32_to_63(self):
+        # TODO output_bit_registers32_to_63
+        pass
+
+    def get_output_bit_register_X(self):
+        # (X=[64 .. 127])
+        # TODO output_bit_register_X
+        pass
+
+    def get_output_int_register_X(self):
+        # (X=[0 .. 47])
+        # TODO output_int_register_X
+        pass
+
+    def get_output_double_register_X(self):
+        # (X=[0 .. 47])
+        # TODO output_double_register_X
+        pass
+
+    def get_input_bit_registers0_to_31(self):
+        # TODO input_bit_registers0_to_31
+        pass
+
+    def get_input_bit_registers32_to_63(self):
+        # TODO input_bit_registers32_to_63
+        pass
+
+    def get_input_bit_register_X(self):
+        # (X=[64 .. 127])
+        # TODO input_bit_register_X
+        pass
+
+    def get_input_int_register_X(self):
+        # (X=[0 .. 48])
+        # TODO input_int_register_X
+        pass
+
+    def get_input_double_register_X(self):
+        # (X=[0 .. 48])
+        # TODO input_double_register_X
+        pass
+
+    def get_tool_output_mode(self):
+        # TODO tool_output_mode
+        pass
+
+    def get_tool_digital_output0_mode(self):
+        # TODO tool_digital_output0_mode
+        pass
+
+    def get_tool_digital_output1_mode(self):
+        # TODO tool_digital_output1_mode
+        pass
+
+    def get_payload(self):
+        # TODO payload
+        pass
+
+    def get_payload_cog(self):
+        # TODO payload_cog
+        pass
+
+    def get_payload_inertia(self):
+        # TODO payload_inertia
+        pass
+
+    def get_script_control_line(self):
+        # TODO script_control_line
+        pass
+
+    def get_ft_raw_wrench(self):
+        # TODO ft_raw_wrench
         pass
 
     # MODIFIED DIGITAL OUTPUT MASK SETTER

@@ -1,9 +1,7 @@
 import RTDE_Python_Client_Library.rtde.rtde as rtde
 import RTDE_Python_Client_Library.rtde.rtde_config as rtde_config
 from RTDE_Python_Client_Library.rtde.rtde import ConnectionState
-
 import time
-
 
 
 class Robot:
@@ -65,18 +63,19 @@ class Robot:
         Just to initialize all the values that will be send to the roboter
         :return: None
         """
-        # self.setup.input_double_register_0 = 0
-        # self.setup.input_double_register_1 = 0
-        # self.setup.input_double_register_2 = 0
-        # self.setup.input_double_register_3 = 0
-        # self.setup.input_double_register_4 = 0
-        # self.setup.input_double_register_5 = 0
+        self.setup.speed_slider_mask = 0
+        self.setup.speed_slider_fraction = 0.2  # slowest possible
 
         self.setup.standard_digital_output = 0
         self.setup.standard_digital_output_mask = 0
 
         self.setup.configurable_digital_output = 0
         self.setup.configurable_digital_output_mask = 0
+
+        self.setup.standard_analog_output_mask = 0
+        self.setup.standard_analog_output_type = 0
+        self.setup.standard_analog_output_0 = 0.0
+        self.setup.standard_analog_output_1 = 0.0
 
         # The function "rtde_set_watchdog" in the "rtde_control_loop.urp" creates a 1 Hz watchdog
         self.watchdog.input_int_register_0 = 0
