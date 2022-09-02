@@ -24,9 +24,9 @@ class URRobot(Robot):
         mask = []
 
         for i in range(7, -1, -1):
-            if (value - 2**i) >= 0:
+            if (value - 2 ** i) >= 0:
                 mask.insert(0, True)
-                value -= 2**i
+                value -= 2 ** i
             else:
                 mask.insert(0, False)
 
@@ -227,25 +227,28 @@ class URRobot(Robot):
         """
         self.set_setup("standard_analog_output_1", value)
 
-    def set_input_bit_registers0_to_31(self):
-        # TODO input_bit_registers0_to_31
+    def set_input_bit_registers0_to_31(self, integer: int):
+        # TODO NEED TO BE TESTED
+        self.set_setup("input_bit_registers0_to_31", integer)
         pass
 
-    def set_input_bit_registers32_to_63(self):
-        # TODO input_bit_registers32_to_63
+    def set_input_bit_registers32_to_63(self, integer: int):
+        # TODO NEED TO BE TESTED
+        self.set_setup("input_bit_registers32_to_63", integer)
         pass
 
-    def set_input_bit_register_X(self):
-        # TODO input_bit_register_X
+    def set_input_bit_register_X(self, bit: int, value: bool):
+        # TODO NEED TO BE TESTED
+        self.set_setup("input_bit_register_%i" % bit, value)
         pass
 
-    def set_input_int_register_X(self):
-        # TODO input_int_register_X
-        pass
+    def set_input_int_register_X(self, bit: int, integer: int):
+        # TODO NEED TO BE TESTED
+        self.set_setup("input_int_register_%i" % bit, integer)
 
-    def set_input_double_register_X(self):
-        # TODO input_double_register_X
-        pass
+    def set_input_double_register_X(self, bit: int, value: float):
+        # TODO NEED TO BE TESTED
+        self.set_setup("input_double_register_%i" % bit, value)
 
     def set_external_force_torque(self):
         # TODO external_force_torque
