@@ -1,7 +1,9 @@
 import RTDE_Python_Client_Library.rtde.rtde as rtde
 import RTDE_Python_Client_Library.rtde.rtde_config as rtde_config
 from RTDE_Python_Client_Library.rtde.rtde import ConnectionState
+
 import time
+
 
 
 class Robot:
@@ -131,4 +133,3 @@ class Robot:
         if part in self.state_names:
             return self.setup.__dict__[part]
         raise Exception("Es gibt kein passenden Übergabewert in der %s Datei", self.config_filename)
-        pass

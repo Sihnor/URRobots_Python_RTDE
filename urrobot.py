@@ -161,7 +161,117 @@ class URRobot(Robot):
             bits = format(self.get_actual_digital_output_bytes()[field], '#010b')[2:0]
         return bool(int(bits[(outputNum * -1) - 1]))
 
-    # Outputs setter
+    # ROBOT CONTROLLER INPUTS
+    def set_speed_slider_mask(self, integer: int):
+        """
+        This will enable to set the speed slider to be controlled by the PC
+        :param integer: (int) 0:disable 1:enable
+        :return: None
+        """
+        self.set_setup("speed_slider_mask", integer)
+        pass
+
+    def set_speed_slider_fraction(self, value: float):
+        """
+        This will set the speed slider.
+        :param value: (float) 0 = 0% | 1 = 100%
+        :return:
+        """
+        if 0.2 <= value <= 1:
+            self.set_setup("speed_slider_fraction", value)
+        else:
+            raise Exception("Please enter a value between 0.2 and 1!")
+
+    def set_standard_digital_output_mask(self, integer: int):
+        self.set_setup("standard_digital_output_mask", integer)
+
+    def set_configurable_digital_output_mask(self, integer: int):
+        self.set_setup("configurable_digital_output_mask", integer)
+
+    def set_standard_digital_output(self, integer: int):
+        self.set_setup("standard_digital_output", integer)
+
+    def set_configurable_digital_output(self, integer: int):
+        self.set_setup("configurable_digital_output", integer)
+
+    def set_standard_analog_output_mask(self):
+        # TODO standard_analog_output_mask
+        pass
+
+    def set_standard_analog_output_type(self):
+        # TODO standard_analog_output_type
+        pass
+
+    def set_standard_analog_output_0(self):
+        # TODO standard_analog_output_0
+        pass
+
+    def set_standard_analog_output_1(self):
+        # TODO standard_analog_output_1
+        pass
+
+    def set_input_bit_registers0_to_31(self):
+        # TODO input_bit_registers0_to_31
+        pass
+
+    def set_input_bit_registers32_to_63(self):
+        # TODO input_bit_registers32_to_63
+        pass
+
+    def set_input_bit_register_X(self):
+        # TODO input_bit_register_X
+        pass
+
+    def set_input_int_register_X(self):
+        # TODO input_int_register_X
+        pass
+
+    def set_input_double_register_X(self):
+        # TODO input_double_register_X
+        pass
+
+    def set_external_force_torque(self):
+        # TODO external_force_torque
+        pass
+
+    # MODIFIED DIGITAL OUTPUT MASK SETTER
+    def set_single_standard_digital_output_mask(self, outputNum: int):
+        """
+        Es wird ein einziger Digitaler Ausgang hinzugefuegt oder entfernt welcher der Computer kontrolliert.
+        :param outputNum: (int) Ausgangs Nummer
+        :return: None
+        """
+        mask_list = self.int_to_maskList(self.get_setup("standard_digital_output_mask"))
+        mask_list[outputNum] = not mask_list[outputNum]
+        self.set_standard_digital_output_mask(self.maskList_to_int(mask_list))
+
+    def set_list_standard_digital_output_mask(self, outputNum: list):
+        """
+        Es wird bestimmt welcher Digitaler Ausgang von dem Computer kontrolliert wird.
+        :param outputNum: (list) Eine Liste der Ausgaenge zum Kontrollieren
+        :return: None
+        """
+        self.set_standard_digital_output_mask(self.maskList_to_int(outputNum))
+
+    def set_single_configurable_digital_output_mask(self, outputNum: int):
+        """
+        Es wird ein einziger Digitaler Ausgang hinzugefuegt oder entfernt welcher der Computer kontrolliert.
+        :param outputNum: (int) Ausgangs Nummer
+        :return: None
+        """
+        mask_list = self.int_to_maskList(self.get_setup("configurable_digital_output_mask"))
+        mask_list[outputNum] = not mask_list[outputNum]
+        self.set_configurable_digital_output_mask(self.maskList_to_int(mask_list))
+
+    def set_list_configurable_digital_output_mask(self, outputNum: list):
+        """
+        Es wird bestimmt welcher Digitaler Ausgang von dem Computer kontrolliert wird.
+        :param outputNum: (list) Eine Liste der Ausgaenge zum Kontrollieren
+        :return: None
+        """
+        self.set_configurable_digital_output_mask(self.maskList_to_int(outputNum))
+
+    # MODIFIED DIGITAL OUTPUT SETTER
     def set_single_standard_digital_output(self, outputNum: int, value: bool) -> None:
         """
         Es wird nur der Ausgang mit dem Wert beschrieben.
@@ -171,7 +281,7 @@ class URRobot(Robot):
         """
         standard_digital_output_list = self.int_to_maskList(self.get_setup("standard_digital_output"))
         standard_digital_output_list[outputNum] = value
-        self.set_setup("standard_digital_output", self.maskList_to_int(standard_digital_output_list))
+        self.set_standard_digital_output(self.maskList_to_int(standard_digital_output_list))
 
     def set_list_standard_digital_output(self, outputNum: list) -> None:
         """
@@ -179,7 +289,7 @@ class URRobot(Robot):
         :param outputNum: (list) Liste der Ausgaenge
         :return: None
         """
-        self.set_setup("standard_digital_output", self.maskList_to_int(outputNum))
+        self.set_standard_digital_output(self.maskList_to_int(outputNum))
 
     def set_single_configurable_digital_output(self, outputNum: int, value: bool) -> None:
         """
@@ -190,7 +300,7 @@ class URRobot(Robot):
         """
         configurable_digital_output_list = self.int_to_maskList(self.get_setup("configurable_digital_output"))
         configurable_digital_output_list[outputNum] = value
-        self.set_setup("configurable_digital_output", self.maskList_to_int(configurable_digital_output_list))
+        self.set_configurable_digital_output(self.maskList_to_int(configurable_digital_output_list))
 
     def set_list_configurable_digital_output(self, outputNum: list) -> None:
         """
@@ -198,41 +308,4 @@ class URRobot(Robot):
         :param outputNum: (list) Liste der Ausgaenge
         :return: None
         """
-        self.set_setup("configurable_digital_output", self.maskList_to_int(outputNum))
-
-    # Outputs Mask setter
-    def set_single_standard_digital_output_mask(self, outputNum: int):
-        """
-        Es wird ein einziger Digitaler Ausgang hinzugefuegt oder entfernt welcher der Computer kontrolliert.
-        :param outputNum: (int) Ausgangs Nummer
-        :return: None
-        """
-        mask_list = self.int_to_maskList(self.get_setup("standard_digital_output_mask"))
-        mask_list[outputNum] = not mask_list[outputNum]
-        self.set_setup("standard_digital_output_mask", self.maskList_to_int(mask_list))
-
-    def set_list_standard_digital_output_mask(self, outputNum: list):
-        """
-        Es wird bestimmt welcher Digitaler Ausgang von dem Computer kontrolliert wird.
-        :param outputNum: (list) Eine Liste der Ausgaenge zum Kontrollieren
-        :return: None
-        """
-        self.set_setup("standard_digital_output_mask", self.maskList_to_int(outputNum))
-
-    def set_single_configurable_digital_output_mask(self, outputNum: int):
-        """
-        Es wird ein einziger Digitaler Ausgang hinzugefuegt oder entfernt welcher der Computer kontrolliert.
-        :param outputNum: (int) Ausgangs Nummer
-        :return: None
-        """
-        mask_list = self.int_to_maskList(self.get_setup("configurable_digital_output_mask"))
-        mask_list[outputNum] = not mask_list[outputNum]
-        self.set_setup("configurable_digital_output_mask", self.maskList_to_int(mask_list))
-
-    def set_list_configurable_digital_output_mask(self, outputNum: list):
-        """
-        Es wird bestimmt welcher Digitaler Ausgang von dem Computer kontrolliert wird.
-        :param outputNum: (list) Eine Liste der Ausgaenge zum Kontrollieren
-        :return: None
-        """
-        self.set_setup("configurable_digital_output_mask", self.maskList_to_int(outputNum))
+        self.set_configurable_digital_output(self.maskList_to_int(outputNum))
