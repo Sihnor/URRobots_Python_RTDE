@@ -56,12 +56,9 @@ class Robot:
         self.setup = self.__con.send_input_setup(self.setup_names, self.setup_types)
         self.watchdog = self.__con.send_input_setup(self.watchdog_names, self.watchdog_types)
 
-        self.init_setup_values()
+        self.init_key_values()
 
-        # The function "rtde_set_watchdog" in the "rtde_control_loop.urp" creates a 1 Hz watchdog
-        self.watchdog.input_int_register_0 = 0
-
-    def init_setup_values(self):
+    def init_key_values(self):
         """
         Just to initialize all the values that will be send to the roboter
         :return: None
@@ -75,6 +72,12 @@ class Robot:
 
         self.setup.standard_digital_output = 0
         self.setup.standard_digital_output_mask = 0
+
+        self.setup.configurable_digital_output = 0
+        self.setup.configurable_digital_output_mask = 0
+
+        # The function "rtde_set_watchdog" in the "rtde_control_loop.urp" creates a 1 Hz watchdog
+        self.watchdog.input_int_register_0 = 0
 
     @staticmethod
     def setup_to_list(self, setup) -> list:
