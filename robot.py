@@ -89,9 +89,8 @@ class Robot:
 
     @staticmethod
     def list_to_setup(self, setup, lst: list):
-        # for i in range(0, 6):
-        #     setup.__dict__["input_double_register_%i" % i] = lst[i]
-        setup.__dict__["standard_digital_output"] = 5
+        for i in range(0, 6):
+            setup.__dict__["input_double_register_%i" % i] = lst[i]
         return setup
 
     def send_start(self):
